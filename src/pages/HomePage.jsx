@@ -1,12 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import Feed from "../components/Feed";
 import { categories } from "../utils/Constants";
 import TrendingPill from "../components/TrendingPill";
 import { getHomeFeed } from "../services/ApiServices";
 import FeedSkeleton from "../components/FeedSkeleton";
-import ToolContext from "../contexts/toolContext";
+import ToolContext from "../contexts/ToolContext";
 
 function HomePage() {
   const [videosList, setVideosList] = useState([]);

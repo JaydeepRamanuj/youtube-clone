@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ToolContext from "../contexts/toolContext";
+import ToolContext from "../contexts/ToolContext";
 
 function ToolProvider({ children }) {
   const [toolVal, setToolVal] = useState({

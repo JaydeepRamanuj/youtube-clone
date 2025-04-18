@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import VideoPlayer from "../components/VideoPlayer";
 import VideoInfo from "../components/VideoInfo";
-import ToolContext from "../contexts/toolContext";
+import ToolContext from "../contexts/ToolContext";
 import {
   getChannelDetails,
   getSuggestedVideos,
@@ -48,12 +48,12 @@ function VideoPage() {
     }));
 
     getData();
-  }, []);
+  }, [videoId, channelId]);
   return (
     <>
       {videoDetails && channelDetails && suggestedVideosList && (
-        <div className="flex text-gray-300 text-3xl">
-          <div className="flex-1 mx-4 flex-wrap max-w-[65%]">
+        <div className="flex flex-col lg:flex-row mx-autotext-gray-300 text-3xl ">
+          <div className="flex-1 px-3 w-full lg:max-w-[70%]">
             <VideoPlayer videoId={videoId} />
             <VideoInfo
               id={videoId}
@@ -70,7 +70,7 @@ function VideoPage() {
             />
             <VideoComments videoId={videoId} />
           </div>
-          <div className="recommended-videos max-w-[400px] text-base">
+          <div className="recommended-videos w-full mt-6 lg:mt-0 lg:max-w-[450px] text-base px-3">
             {suggestedVideosList &&
               suggestedVideosList.map((video, index) => (
                 <VideoCardHorizontal

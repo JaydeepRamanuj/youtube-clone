@@ -69,6 +69,7 @@ async function getVideoComments(id) {
 
 async function getSearchResults(searchKey) {
   const url = `https://youtube-v31.p.rapidapi.com/search?q=${searchKey}&part=snippet%2Cid&order=date`;
+  // console.log(searchKey);
 
   try {
     const response = await fetch(url, options);

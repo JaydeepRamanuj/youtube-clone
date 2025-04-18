@@ -7,7 +7,7 @@ import Feed from "../components/Feed";
 import FeedSkeleton from "../components/FeedSkeleton";
 import Skeleton from "react-loading-skeleton";
 import { useParams, useSearchParams } from "react-router-dom";
-import ToolContext from "../contexts/toolContext";
+import ToolContext from "../contexts/ToolContext";
 import { IoMail, IoPerson } from "react-icons/io5";
 import { IoIosShareAlt, IoMdClose } from "react-icons/io";
 import { FaGlobe, FaGlobeAfrica, FaInfoCircle } from "react-icons/fa";
@@ -88,15 +88,15 @@ function ChannelPage() {
             {/* banner */}
             <div>
               <img
-                className="h-52 w-full rounded-2xl object-cover"
+                className="h-24 lg:h-52 w-full rounded-2xl object-cover"
                 src={channelData.brandingSettings?.image.bannerExternalUrl}
                 alt=""
               />
             </div>
             {/* channel title */}
-            <div className="my-6 max-w-1/2 text-white flex items-center">
+            <div className="my-6 max-w-1/2 text-white flex items-center flex-wrap p-3">
               <img
-                className="size-[150px] rounded-full mr-7 object-cover"
+                className="size-[100px] lg:size-[150px] rounded-full mr-7 object-cover"
                 src={channelData.snippet.thumbnails.medium.url}
                 alt=""
               />

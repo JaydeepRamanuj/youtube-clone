@@ -32,7 +32,10 @@ function Comment({
         <h5 className="flex">
           <span>{commenterName}</span> <TimeAgo publishTime={publishTime} />
         </h5>
-        <h5>{comment}</h5>
+        {/* <pre className="text-wrap">{comment}</pre> */}
+        <div class="font-sans break-words overflow-hidden">
+          <p class="whitespace-pre-wrap">{comment}</p>
+        </div>
         <div className="flex items-center">
           <span
             className="cursor-pointer"

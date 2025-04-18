@@ -16,7 +16,9 @@ function VideoCardHorizontal({
   const navigate = useNavigate();
   return (
     <Link to={`/watch?v=${videoId}`} state={{ channelId }}>
-      <div className="min-w-[250px] p-1.5 cursor-pointer rounded-md transition-all hover:bg-white/10 group flex gap-2">
+      <div
+        className={`md:min-w-[250px] p-1.5 cursor-pointer rounded-md transition-all hover:bg-white/10 group flex gap-2 `}
+      >
         <div className="relative min-w-[40%] max-w-[40%]">
           <img
             className="rounded-md brightness-75 transition-all group-hover:brightness-100 min-w-full min-h-full object-cover"
@@ -38,12 +40,12 @@ function VideoCardHorizontal({
             </div>
           )}
           <div className="text-start ml-2 mr-auto">
-            <div className="text-white line-clamp-2">{title}</div>
+            <div className="text-white text-wrap">{title}</div>
             <div
               className="text-gray-400 text-sm hover:text-slate-500 mt-1.5"
               onClick={(e) => {
                 e.preventDefault();
-                navigate(`channel/${channelId}`);
+                navigate(`/channel/${channelId}`);
               }}
             >
               {channelName}

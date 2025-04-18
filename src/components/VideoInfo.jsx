@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { formatViews } from "../utils/utils";
 import { FaThumbsDown, FaThumbsUp } from "react-icons/fa";
 import { RxDividerVertical } from "react-icons/rx";
@@ -35,11 +35,24 @@ function VideoInfo({
   const [subscribed, setSubscribed] = useState(false);
   const [joined, setJoined] = useState(false);
   const navigate = useNavigate();
+  useEffect(() => {}, [
+    videoId,
+    channelId,
+    title,
+    channelName,
+    likeCount,
+    views,
+    uploadedOn,
+    description,
+    creatorAvatar,
+    subscriberCount,
+  ]);
+
   return (
-    <div className="mt-5 items-center text-base font-semibold">
+    <div className="mt-5 items-center text-base font-semibold text-white">
       <div>
-        <h1 className="text-xl font-bold line-clamp-2">{title}</h1>
-        <div className="flex mt-3">
+        <h1 className="text-xl font-bold line-clamp-2 text-white">{title}</h1>
+        <div className="flex mt-3 flex-wrap flex-start gap-4">
           <div className="flex items-center mr-6">
             <span>
               <img
@@ -50,7 +63,7 @@ function VideoInfo({
             </span>
             <div className="flex flex-col">
               <span
-                className="cursor-pointer"
+                className="cursor-pointer text-white"
                 onClick={(e) => {
                   e.preventDefault();
                   navigate(`/channel/${channelId}`);
@@ -90,7 +103,7 @@ function VideoInfo({
               {subscribed ? "Subscribed" : "Subscribe"}
             </button>
           </div>
-          <div className="flex items-center ml-auto gap-3 ">
+          <div className="flex items-center ml-auto gap-3 flex-wrap">
             <button className="px-4 py-1.5 w-fit rounded-full bg-white/15 text-center text-white hover:bg-white/25 flex items-center">
               <span
                 className="flex items-center gap-1.5"

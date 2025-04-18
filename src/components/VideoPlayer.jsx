@@ -9,7 +9,7 @@ function VideoPlayer({ videoId }) {
         frameBorder="0"
         allow="autoplay; encrypted-media"
         allowFullScreen
-        className="w-full md:min-h-[550px] "
+        className="w-full min-h-[300px] md:min-h-[700px] "
       ></iframe>
     </div>
   );

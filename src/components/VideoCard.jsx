@@ -40,7 +40,7 @@ function VideoCard({
               className="text-slate-600 text-sm hover:text-slate-500"
               onClick={(e) => {
                 e.preventDefault();
-                navigate(`channel/${channelId}`);
+                navigate(`/channel/${channelId}`);
               }}
             >
               {channelName}

@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { getSearchResults } from "../services/ApiServices";
-import SearchResultVideoList from "../components/SearchResultVideoList";
 import VideoCardHorizontal from "../components/VideoCardHorizontal";
-import ToolContext from "../contexts/toolContext";
+import ToolContext from "../contexts/ToolContext";
 import { useSearchParams } from "react-router-dom";
 import { formatViews, getRandomNumber } from "../utils/utils";
 import TimeAgo from "../components/TimeAgo";
+import { useBreakpoint } from "../custom-hooks/useBreakpoints";
 
 function ResultsPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,9 +13,11 @@ function ResultsPage() {
   const { toolVal, setToolVal } = useContext(ToolContext);
   const [searchParams] = useSearchParams();
   const key = searchParams.get("q");
+  const breakpoint = useBreakpoint();
   async function getData() {
     setIsLoading(true);
     const result = await getSearchResults(key);
+    // console.log(result);
     if (result.length != 0) {
       setVideoList(result);
       setIsLoading(false);
@@ -23,7 +25,7 @@ function ResultsPage() {
   }
   useEffect(() => {
     getData();
-  }, []);
+  }, [key]);
   return (
     <div className="mt-4 flex flex-col gap-3 px-6">
       {videoList &&
@@ -42,6 +44,7 @@ function ResultsPage() {
               <TimeAgo publishTime={video.snippet.publishTime} /> ||
               "5 months ago"
             }
+            showAvatar={breakpoint < 640 && false}
           />
         ))}
     </div>

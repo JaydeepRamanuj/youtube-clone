@@ -13,7 +13,7 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Popup from "./components/Popup";
 import { useContext } from "react";
-import ToolContext from "./contexts/toolContext";
+import ToolContext from "./contexts/ToolContext";
 import ResultsPage from "./pages/ResultsPage";
 function App() {
   const { toolVal } = useContext(ToolContext);

@@ -1,7 +1,9 @@
+const APIKey = process.env.X_RAPIDAPI_KEY;
+
 const options = {
   method: "GET",
   headers: {
-    "x-rapidapi-key": "d9157a4f04msh0a0a40455adbce6p1d5de2jsn82bc8e38c437",
+    "x-rapidapi-key": APIKey,
     "x-rapidapi-host": "youtube-v31.p.rapidapi.com",
   },
 };

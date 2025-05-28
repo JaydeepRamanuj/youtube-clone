@@ -14,22 +14,26 @@ import {
   secondaryOptions,
 } from "../utils/Constants";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { toast } from "react-toastify";
 
 function Sidebar() {
   const { toolVal, setToolVal } = useContext(ToolContext);
   const isCollapsed = toolVal.sidebarCollapse;
   const isSidebarHidden = toolVal.isSidebarHidden;
-  console.log("isCollapsed =>", isCollapsed);
+  // console.log("isCollapsed =>", isCollapsed);
   const breakpoint = useBreakpoint();
   const navigate = useNavigate();
   const ref = useRef(null);
   const isMobile = breakpoint < 992;
-
+  const notify = () => toast.info("That is non interactive element !");
   useEffect(() => {}, [breakpoint]);
 
   return (
     <div
       ref={ref}
+      onClick={() => {
+        notify();
+      }}
       className={`
         // ${isMobile ? "-left-full fixed" : "static"}
         ${isCollapsed ? "min-w-[100px]" : "min-w-[230px] left-0"}

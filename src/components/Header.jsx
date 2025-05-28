@@ -7,10 +7,12 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import ToolContext from "../contexts/ToolContext";
 import { useNavigate } from "react-router-dom";
 import { useBreakpoint } from "../custom-hooks/useBreakpoints";
+import { toast } from "react-toastify";
 
 function Header() {
   const { toolVal, setToolVal } = useContext(ToolContext);
   const [value, setValue] = useState(toolVal.searchKey);
+  const notify = () => toast.info("That is non interactive element !");
   const navigate = useNavigate();
   const breakpoint = useBreakpoint();
   const handleToggle = () => {
@@ -130,13 +132,20 @@ function Header() {
             </div>
           </form>
 
-          <span className="size-10 p-1.5 rounded-full flex justify-center items-center bg-white/10 ml-2 cursor-pointer hover:bg-yellow-400/20 transition-all duration-200">
+          <span className="size-10 p-1.5 rounded-full flex justify-center items-center bg-white/10 ml-2 cursor-pointer hover:bg-yellow-400/20 transition-all duration-200" onClick={()=>{
+            notify()
+          }}>
             <FaMicrophone />
           </span>
         </div>
 
         {breakpoint > 640 && (
-          <div className="options flex items-center gap-4">
+          <div
+            className="options flex items-center gap-4"
+            onClick={() => {
+              notify();
+            }}
+          >
             <BsThreeDotsVertical className="cursor-pointer hover:text-gray-400 transition-colors" />
             <span className="flex items-center border border-white/30 px-2 py-1 rounded-full cursor-pointer hover:border-gray-400 hover:text-gray-400 transition-all duration-200">
               <IoPersonCircleOutline className="mr-1.5 size-5" /> Sign in

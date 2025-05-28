@@ -12,6 +12,7 @@ import VideoComments from "../components/VideoComments";
 import { formatViews, getRandomNumber } from "../utils/utils";
 import VideoCardHorizontal from "../components/VideoCardHorizontal";
 import TimeAgo from "../components/TimeAgo";
+import Loader from "../components/Loader";
 
 function VideoPage() {
   const [searchParams] = useSearchParams();
@@ -51,16 +52,16 @@ function VideoPage() {
   }, [videoId, channelId]);
   return (
     <>
-      {videoDetails && channelDetails && suggestedVideosList && (
+      {videoDetails && channelDetails && suggestedVideosList ? (
         <div className="flex flex-col lg:flex-row mx-auto text-gray-300 text-3xl min-w-full">
           <div className="flex-1 px-3 w-full md:min-w-[70%]">
             <VideoPlayer videoId={videoId} />
             <VideoInfo
               id={videoId}
               channelName={videoDetails.snippet?.channelTitle}
-              creatorAvatar={channelDetails.snippet.thumbnails.medium?.url}
+              creatorAvatar={channelDetails.snippet?.thumbnails?.medium?.url}
               likeCount={videoDetails.statistics?.likeCount}
-              subscriberCount={channelDetails.statistics.subscriberCount}
+              subscriberCount={channelDetails.statistics?.subscriberCount}
               uploadedOn={videoDetails.snippet?.publishedAt}
               views={videoDetails.statistics?.viewCount}
               title={videoDetails.snippet?.title}
@@ -77,10 +78,10 @@ function VideoPage() {
                   key={index}
                   channelId={video.snippet?.channelId}
                   channelName={video.snippet?.channelTitle}
-                  thumbnailURL={video.snippet?.thumbnails.medium.url}
+                  thumbnailURL={video.snippet?.thumbnails?.medium?.url}
                   title={video.snippet?.title}
                   videoId={video.id.videoId}
-                  videoThumbnailURL={video.snippet?.thumbnails.medium.url}
+                  videoThumbnailURL={video.snippet?.thumbnails?.medium?.url}
                   views={formatViews(getRandomNumber(1000, 1000000))}
                   runtime={`${getRandomNumber(1, 8)}:${getRandomNumber(1, 60)}`}
                   postedTime={
@@ -91,6 +92,10 @@ function VideoPage() {
                 />
               ))}
           </div>
+        </div>
+      ) : (
+        <div className="w-full h-full flex justify-center items-center">
+          <Loader />
         </div>
       )}
       ;

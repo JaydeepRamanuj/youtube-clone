@@ -17,6 +17,7 @@ import ToolContext from "./contexts/ToolContext";
 import ResultsPage from "./pages/ResultsPage";
 import { useBreakpoint } from "./custom-hooks/useBreakpoints";
 import SidebarMobile from "./components/SidebarMobile";
+import { ToastContainer } from "react-toastify";
 function App() {
   const { toolVal } = useContext(ToolContext);
   const breakpoint = useBreakpoint();
@@ -37,6 +38,7 @@ function App() {
               </Routes>
             </div>
           </div>
+          <ToastContainer />
 
           {toolVal.showPopup && <Popup />}
         </div>

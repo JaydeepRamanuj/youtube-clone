@@ -11,11 +11,13 @@ import ToolContext from "../contexts/ToolContext";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function SidebarMobile() {
   const { toolVal, setToolVal } = useContext(ToolContext);
   const isSidebarHidden = toolVal.isSidebarHidden;
   const navigate = useNavigate();
+  const notify = () => toast.info("That is non interactive element !");
   const handleToggle = () => {
     setToolVal((prev) => ({ ...prev, isSidebarHidden: !prev.isSidebarHidden }));
   };
@@ -87,7 +89,12 @@ function SidebarMobile() {
           </svg>
         </div>
 
-        <div className="text-white text-start">
+        <div
+          className="text-white text-start"
+          onClick={() => {
+            notify();
+          }}
+        >
           <SidebarList sidebarItems={primaryOptions} />
           <hr className="border-white/20 my-3" />
           <SidebarList sidebarItems={secondaryOptions} />

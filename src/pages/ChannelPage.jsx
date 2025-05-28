@@ -54,9 +54,7 @@ function ChannelPage() {
           <div className="my-6 max-w-1/2 text-white flex items-center flex-wrap p-3">
             <img
               className="size-[100px] lg:size-[150px] rounded-full mr-7 object-cover"
-              src={
-                channelData?.snippet?.thumbnails?.medium.url || "/avatar.png"
-              }
+              src={channelData.snippet.thumbnails?.medium.url || "/avatar.png"}
               alt=""
             />
             <div className="">
@@ -133,7 +131,7 @@ function ChannelPage() {
                           <div className="flex gap-4 mt-4 items-center">
                             <FaGlobe className="text-2xl" />
                             <span>
-                              www.youtube.com/${channelData?.snippet?.customUrl}
+                              www.youtube.com/${channelData.snippet?.customUrl}
                             </span>
                           </div>
                           <div className="flex gap-4 mt-4 items-center">
@@ -180,7 +178,7 @@ function ChannelPage() {
                 }}
               >
                 <span className="max-w-[400px] line-clamp-1 text-gray-400">
-                  {channelData.brandingSettings?.channel?.description}
+                  {channelData.brandingSettings.channel?.description}
                 </span>
                 <span>more</span>
               </h6>

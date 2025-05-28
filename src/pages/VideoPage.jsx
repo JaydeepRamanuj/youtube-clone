@@ -57,14 +57,14 @@ function VideoPage() {
             <VideoPlayer videoId={videoId} />
             <VideoInfo
               id={videoId}
-              channelName={videoDetails.snippet.channelTitle}
-              creatorAvatar={channelDetails.snippet.thumbnails.medium.url}
-              likeCount={videoDetails.statistics.likeCount}
+              channelName={videoDetails.snippet?.channelTitle}
+              creatorAvatar={channelDetails.snippet.thumbnails.medium?.url}
+              likeCount={videoDetails.statistics?.likeCount}
               subscriberCount={channelDetails.statistics.subscriberCount}
-              uploadedOn={videoDetails.snippet.publishedAt}
-              views={videoDetails.statistics.viewCount}
-              title={videoDetails.snippet.title}
-              description={videoDetails.snippet.description}
+              uploadedOn={videoDetails.snippet?.publishedAt}
+              views={videoDetails.statistics?.viewCount}
+              title={videoDetails.snippet?.title}
+              description={videoDetails.snippet?.description}
               channelId={channelId}
               videoId={videoId}
             />
@@ -75,16 +75,16 @@ function VideoPage() {
               suggestedVideosList.map((video, index) => (
                 <VideoCardHorizontal
                   key={index}
-                  channelId={video.snippet.channelId}
-                  channelName={video.snippet.channelTitle}
-                  thumbnailURL={video.snippet.thumbnails.medium.url}
-                  title={video.snippet.title}
+                  channelId={video.snippet?.channelId}
+                  channelName={video.snippet?.channelTitle}
+                  thumbnailURL={video.snippet?.thumbnails.medium.url}
+                  title={video.snippet?.title}
                   videoId={video.id.videoId}
-                  videoThumbnailURL={video.snippet.thumbnails.medium.url}
+                  videoThumbnailURL={video.snippet?.thumbnails.medium.url}
                   views={formatViews(getRandomNumber(1000, 1000000))}
                   runtime={`${getRandomNumber(1, 8)}:${getRandomNumber(1, 60)}`}
                   postedTime={
-                    <TimeAgo publishTime={video.snippet.publishTime} /> ||
+                    <TimeAgo publishTime={video.snippet?.publishTime} /> ||
                     "5 months ago"
                   }
                   showAvatar={false}

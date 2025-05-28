@@ -1,9 +1,4 @@
-// const APIKey = process.env.X_RAPIDAPI_KEY;
-
-// Note: I'm aware that API keys should't be exposed in such way, but due to some unknown api key issue on netlify I'm hardcoding it here.
-
-// One possibility is that since my using api from client side, it might get exposed to public and may cause some rate limit issue which may be creating problem with rapid api.
-const APIKey = "d9157a4f04msh0a0a40455adbce6p1d5de2jsn82bc8e38c437";
+const APIKey = import.meta.env.VITE_X_RAPIDAPI_KEY;
 
 const options = {
   method: "GET",

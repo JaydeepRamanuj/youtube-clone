@@ -18,7 +18,7 @@ function VideoComments({ videoId }) {
     getData();
   }, [videoId]);
   return (
-    <div className="mt-3 max-h-[300px] md:max-h-none overflow-y-auto lg:overflow-y-auto lg:w-full bg-white/20 p-2 rounded-md">
+    <div className="mt-3 max-h-[300px] md:max-h-none overflow-y-auto lg:overflow-y-auto lg:w-full bg-white/10 p-3 rounded-md">
       {commentData && (
         <h1 className="text-lg font-bold text-white">
           <span>{formatViews(commentData.length)}</span> <span> Comments</span>

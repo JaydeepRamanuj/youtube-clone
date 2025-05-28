@@ -20,25 +20,36 @@ function Comment({
   const [dislike, setDisLike] = useState(false);
   const [likeAmount, setLikeAmount] = useState(likeCount);
   return (
-    <div className="flex items-start text-base mt-2 text-gray-400">
-      <div className="size-8 mr-2.5 mt-2">
+    <div className="flex items-start text-sm md:text-base text-gray-300 mt-4">
+      {/* Avatar */}
+      <div className="w-10 h-10 mr-3 shrink-0">
         <img
-          className="min-w-8 min-h-8 rounded-full object-cover mr-2"
-          src={commenterAvatar}
-          alt=""
+          className="w-10 h-10 rounded-full object-cover"
+          src={commenterAvatar || "/avatar.png"}
+          alt={commenterName}
         />
       </div>
-      <div>
-        <h5 className="flex">
-          <span>{commenterName}</span> <TimeAgo publishTime={publishTime} />
-        </h5>
-        {/* <pre className="text-wrap">{comment}</pre> */}
-        <div class="font-sans break-words overflow-hidden">
-          <p class="whitespace-pre-wrap">{comment}</p>
+
+      {/* Comment Content */}
+      <div className="flex-1">
+        {/* Name + Timestamp */}
+        <div className="flex items-center gap-2 font-semibold text-white">
+          <span>{commenterName}</span>
+          <span className="text-gray-400 font-normal text-sm">
+            <TimeAgo publishTime={publishTime} />
+          </span>
         </div>
-        <div className="flex items-center">
-          <span
-            className="cursor-pointer"
+
+        {/* Comment Text */}
+        <div className="mt-1 whitespace-pre-wrap break-words text-gray-300 leading-relaxed">
+          {comment}
+        </div>
+
+        {/* Reactions */}
+        <div className="flex items-center gap-3 mt-2 text-gray-400">
+          {/* Like Button */}
+          <button
+            className="flex items-center gap-1 hover:text-white transition-colors"
             onClick={() => {
               setLike(!like);
               like
@@ -46,19 +57,27 @@ function Comment({
                 : setLikeAmount(likeAmount + 1);
             }}
           >
-            {like ? <RiThumbUpFill /> : <RiThumbUpLine />}
-          </span>
+            {like ? (
+              <RiThumbUpFill className="text-lg" />
+            ) : (
+              <RiThumbUpLine className="text-lg" />
+            )}
+            <span className="text-sm">{formatViews(likeAmount)}</span>
+          </button>
 
-          <span className="mx-2">{formatViews(likeAmount)}</span>
-
-          <span
-            className="cursor-pointer"
+          {/* Dislike Button */}
+          <button
+            className="hover:text-white transition-colors"
             onClick={() => {
               setDisLike(!dislike);
             }}
           >
-            {dislike ? <RiThumbDownFill /> : <RiThumbDownLine />}
-          </span>
+            {dislike ? (
+              <RiThumbDownFill className="text-lg" />
+            ) : (
+              <RiThumbDownLine className="text-lg" />
+            )}
+          </button>
         </div>
       </div>
     </div>

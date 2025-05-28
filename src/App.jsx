@@ -15,16 +15,19 @@ import Popup from "./components/Popup";
 import { useContext } from "react";
 import ToolContext from "./contexts/ToolContext";
 import ResultsPage from "./pages/ResultsPage";
+import { useBreakpoint } from "./custom-hooks/useBreakpoints";
+import SidebarMobile from "./components/SidebarMobile";
 function App() {
   const { toolVal } = useContext(ToolContext);
+  const breakpoint = useBreakpoint();
   return (
     <>
       <Router>
         <div className="h-screen overflow-hidden flex flex-col relative">
           <Header />
           <div className="flex overflow-hidden">
-            <Sidebar />
-            <div className="flex-1 overflow-auto scrollable-element">
+            {breakpoint < 640 ? <SidebarMobile /> : <Sidebar />}
+            <div className="flex-1 overflow-auto sm:scrollable-element">
               <Routes>
                 <Route path="/" exact element={<HomePage />} />
                 <Route path="/watch" element={<VideoPage />} />

@@ -50,20 +50,42 @@ function VideoInfo({
 
   return (
     <div className="mt-5 items-center text-base font-semibold text-white">
-      <div>
-        <h1 className="text-xl font-bold line-clamp-2 text-white">{title}</h1>
-        <div className="flex mt-3 flex-wrap flex-start gap-4">
-          <div className="flex items-center mr-6">
-            <span>
-              <img
-                className="size-10 object-cover rounded-full mr-4"
-                src={creatorAvatar}
-                alt=""
-              />
+      <h1 className="text-xl font-bold line-clamp-2 text-white">{title}</h1>
+      <div className="flex mt-3 flex-wrap flex-start gap-4">
+        {/* <div className="flex items-center mr-6">
+          <span>
+            <img
+              className="size-10 object-cover rounded-full mr-4"
+              src={creatorAvatar}
+              alt=""
+            />
+          </span>
+          <div className="flex flex-col">
+            <span
+              className="cursor-pointer text-white"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate(`/channel/${channelId}`);
+              }}
+            >
+              {channelName}
             </span>
+            <span className="text-sm text-gray-400">
+              {formatViews(subscriberCount)} subscribers
+            </span>
+          </div>
+        </div> */}
+        <div className="flex flex-wrap gap-4 mt-4 items-center">
+          {/* Avatar + Channel Info */}
+          <div className="flex items-center gap-4 mr-6">
+            <img
+              src={creatorAvatar}
+              alt=""
+              className="w-10 h-10 rounded-full object-cover"
+            />
             <div className="flex flex-col">
               <span
-                className="cursor-pointer text-white"
+                className="cursor-pointer hover:underline"
                 onClick={(e) => {
                   e.preventDefault();
                   navigate(`/channel/${channelId}`);
@@ -76,37 +98,38 @@ function VideoInfo({
               </span>
             </div>
           </div>
+
+          {/* Subscribe + Join Buttons */}
           <div className="flex items-center gap-3">
             <button
-              className={`px-4 py-1.5 w-fit rounded-full bg-white text-center text-black hover:bg-gray-200"
-            ${
-              joined
-                ? "bg-white/20 text-white hover:bg-white/30 "
-                : "text-black hover:bg-gray-200"
-            }`}
-              onClick={() => {
-                setJoined(!joined);
-              }}
+              className={`px-4 py-1.5 rounded-full text-sm transition-colors ${
+                joined
+                  ? "bg-white/20 text-white hover:bg-white/30"
+                  : "bg-white text-black hover:bg-gray-200"
+              }`}
+              onClick={() => setJoined(!joined)}
             >
               {joined ? "Joined" : "Join"}
             </button>
+
             <button
-              className={`px-4 py-1.5 w-fit rounded-full bg-white text-center  ${
+              className={`px-4 py-1.5 rounded-full text-sm transition-colors ${
                 subscribed
-                  ? "bg-white/20 text-white hover:bg-white/30 "
-                  : "text-black hover:bg-gray-200"
-              } `}
-              onClick={() => {
-                setSubscribed(!subscribed);
-              }}
+                  ? "bg-white/20 text-white hover:bg-white/30"
+                  : "bg-white text-black hover:bg-gray-200"
+              }`}
+              onClick={() => setSubscribed(!subscribed)}
             >
               {subscribed ? "Subscribed" : "Subscribe"}
             </button>
           </div>
-          <div className="flex items-center ml-auto gap-3 flex-wrap">
-            <button className="px-4 py-1.5 w-fit rounded-full bg-white/15 text-center text-white hover:bg-white/25 flex items-center">
+
+          {/* Action Buttons */}
+          <div className="flex flex-wrap items-center gap-3 ml-auto">
+            {/* Like/Dislike */}
+            <button className="px-4 py-1.5 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center gap-2">
               <span
-                className="flex items-center gap-1.5"
+                className="flex items-center gap-1"
                 onClick={() => {
                   setLike(!like);
                   like
@@ -114,53 +137,51 @@ function VideoInfo({
                     : setLikeAmount(likeAmount + 1);
                 }}
               >
-                {/* <IoMdThumbsUp /> */}
                 {like ? <RiThumbUpFill /> : <RiThumbUpLine />}
                 {formatViews(likeAmount)}
               </span>
-              <RxDividerVertical />
-              <span
-                onClick={() => {
-                  setdisLike(!dislike);
-                }}
-              >
-                {/* <IoMdThumbsDown /> */}
+              <span onClick={() => setdisLike(!dislike)} className="ml-2">
                 {dislike ? <RiThumbDownFill /> : <RiThumbDownLine />}
               </span>
             </button>
-            <button className="px-4 py-1.5 w-fit rounded-full bg-white/15 text-center text-white hover:bg-white/25 flex items-center gap-1.5">
+
+            {/* Share */}
+            <button className="px-4 py-1.5 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center gap-2">
               <IoIosShareAlt />
               <span>Share</span>
             </button>
-            <button className="px-4 py-1.5 w-fit rounded-full bg-white/15 text-center text-white hover:bg-white/25 flex items-center gap-1.5">
+
+            {/* Download */}
+            <button className="px-4 py-1.5 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center gap-2">
               <RiDownloadLine />
               <span>Download</span>
             </button>
-            <button className="p-3 w-fit rounded-full bg-white/15 text-center text-white hover:bg-white/25 flex items-center justify-center">
+
+            {/* More */}
+            <button className="p-3 rounded-full bg-white/15 hover:bg-white/25 text-white">
               <IoEllipsisHorizontalSharp />
             </button>
           </div>
         </div>
-        <div className=" mt-3 bg-white/15 rounded-lg p-2">
-          <h5 className="flex gap-2">
-            <span>{formatViews(views)} views</span>
-            <TimeAgo publishTime={uploadedOn} />
-          </h5>
-          <pre
-            className={`font-normal text-gray-400 transition-all overflow-hidden font-sans  ${
-              loadMore ? "h-fit" : "h-[20px]"
-            }`}
-          >
-            {description}
-          </pre>
-          <span
-            onClick={() => {
-              setLoadMore(!loadMore);
-            }}
-          >
-            {loadMore ? "show less" : "...more"}
-          </span>
+      </div>
+      <div className="mt-4 bg-white/10 rounded-lg p-3 text-gray-300 font-normal text-sm font-sans ">
+        <div className="flex gap-2 mb-1 text-white">
+          <span>{formatViews(views)} views</span>
+          <TimeAgo publishTime={uploadedOn} />
         </div>
+        <pre
+          className={`transition-all overflow-hidden font-sans ${
+            loadMore ? "max-h-fit" : "max-h-[24px]"
+          }`}
+        >
+          {description}
+        </pre>
+        <span
+          className="text-sm text-gray-300 cursor-pointer"
+          onClick={() => setLoadMore(!loadMore)}
+        >
+          {loadMore ? "show less" : "...more"}
+        </span>
       </div>
     </div>
   );

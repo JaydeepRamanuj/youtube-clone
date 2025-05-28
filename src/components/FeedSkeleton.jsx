@@ -1,40 +1,60 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 function FeedSkeleton() {
   return (
-    <div className="mt-8 flex flex-1 flex-wrap justify-center gap-2 gap-y-2">
-      {Array.from({ length: 16 }).map((_, index) => (
-        <div key={index}>
+    <div className="mt-8 flex flex-wrap justify-center gap-6">
+      {Array.from({ length: 12 }).map((_, index) => (
+        <div key={index} className="w-[300px]">
           <Skeleton
+            height={168} // 16:9 ratio for 300px width
+            borderRadius={12}
             baseColor="#202020"
             highlightColor="#444"
-            height={150}
-            width={300}
-            className="rounded-lg"
+            className="mb-3"
           />
-          <div className="flex">
+
+          <div className="flex gap-3">
             <Skeleton
-              circle={true}
-              width={40}
-              height={40}
+              circle
+              height={36}
+              width={36}
               baseColor="#202020"
               highlightColor="#444"
-              className="rounded-full mr-2"
             />
-            <div>
+            <div className="flex flex-col gap-1">
               <Skeleton
+                height={14}
+                width={180}
+                style={{ width: "90%" }}
                 baseColor="#202020"
                 highlightColor="#444"
-                className="rounded-lg"
-                width={250}
               />
+
               <Skeleton
+                height={12}
+                width={180}
                 baseColor="#202020"
                 highlightColor="#444"
-                className="rounded-lg"
-                width={250}
               />
+
+              <div className="flex gap-2">
+                <Skeleton
+                  height={12}
+                  width={80}
+                  // style={{ width: "50%" }}
+                  baseColor="#202020"
+                  highlightColor="#444"
+                />
+                <Skeleton
+                  height={12}
+                  width={80}
+                  // style={{ width: "50%" }}
+                  baseColor="#202020"
+                  highlightColor="#444"
+                />
+              </div>
             </div>
           </div>
         </div>

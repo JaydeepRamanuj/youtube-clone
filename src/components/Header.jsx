@@ -14,14 +14,24 @@ function Header() {
   const navigate = useNavigate();
   const breakpoint = useBreakpoint();
   const handleToggle = () => {
-    setToolVal((prev) => ({ ...prev, sidebarCollapse: !prev.sidebarCollapse }));
+    if (breakpoint < 640) {
+      setToolVal((prev) => ({
+        ...prev,
+        isSidebarHidden: !prev.isSidebarHidden,
+      }));
+    } else {
+      setToolVal((prev) => ({
+        ...prev,
+        sidebarCollapse: !prev.sidebarCollapse,
+      }));
+    }
   };
   return (
     <>
-      <div className="min-h-[80px] text-white flex p-2 items-center justify-between px-4">
+      <div className="min-h-[60px] text-white flex p-2 items-center justify-between px-4 border-b border-white/10 bg-black">
         <div className="flex items-center gap-8">
           <span
-            className="p-2 hover:bg-white/10 rounded-full cursor-pointer"
+            className="p-2 hover:bg-yellow-400/20 rounded-full cursor-pointer transition-all duration-200"
             onClick={handleToggle}
           >
             <RxHamburgerMenu className="size-5" />
@@ -35,9 +45,10 @@ function Header() {
               viewBox="0 0 93 20"
               focusable="false"
               aria-hidden="true"
-              className="w-full h-full cursor-pointer"
+              className="px-1 cursor-pointer"
               onClick={() => {
                 navigate("/");
+                handleToggle();
               }}
             >
               <g>
@@ -80,9 +91,9 @@ function Header() {
             </svg>
           )}
         </div>
+
         <div className="flex">
           <form
-            action=""
             onSubmit={(e) => {
               e.preventDefault();
               if (value != "") {
@@ -92,20 +103,16 @@ function Header() {
               }
             }}
           >
-            <div className="search-bar border border-white/20 rounded-full flex relative">
+            <div className="search-bar border border-white/20 rounded-full flex relative transition-all ">
               <input
                 type="text"
-                name=""
-                id=""
                 value={value}
                 placeholder="Search"
-                className="bg-transparent w-[130px]  lg:w-[450px] p-1.5 px-3 rounded-full transition-all rounded-r-none peer focus:pl-8 outline-none focus:outline-blue-500 outline-offset-0"
-                onChange={(e) => {
-                  setValue(e.target.value);
-                }}
+                className="bg-transparent w-[130px] lg:w-[450px] p-1.5 px-3 rounded-full rounded-r-none peer focus:pl-8 outline-none transition-all duration-200 focus:outline-gray-300"
+                onChange={(e) => setValue(e.target.value)}
               />
               <span
-                className="w-14 bg-white/10 min-h-full p-1.5 flex justify-center items-center rounded-r-full hover:bg-white/20 cursor-pointer"
+                className="w-14 bg-white/10 min-h-full p-1.5 flex justify-center items-center rounded-r-full hover:bg-yellow-400/20 cursor-pointer transition-all"
                 onClick={(e) => {
                   e.preventDefault();
                   if (value != "") {
@@ -117,20 +124,21 @@ function Header() {
               >
                 <CiSearch className="size-5" />
               </span>
-              <span className="absolute justify-center items-center h-full p-1.5 px-2 top-0 left-0 hidden peer-focus:flex">
+              <span className="absolute justify-center items-center h-full p-1.5 px-2 top-0 left-0 hidden peer-focus:flex text-gray-400">
                 <CiSearch className="size-5" />
               </span>
             </div>
           </form>
 
-          <span className="size-10 p-1.5 rounded-full flex justify-center items-center bg-white/10 ml-2 transition-all cursor-pointer hover:bg-white/20">
+          <span className="size-10 p-1.5 rounded-full flex justify-center items-center bg-white/10 ml-2 cursor-pointer hover:bg-yellow-400/20 transition-all duration-200">
             <FaMicrophone />
           </span>
         </div>
+
         {breakpoint > 640 && (
           <div className="options flex items-center gap-4">
-            <BsThreeDotsVertical className="cursor-pointer" />
-            <span className="w-fit flex items-center border px-2 py-1 rounded-full border-white/30 cursor-pointer">
+            <BsThreeDotsVertical className="cursor-pointer hover:text-gray-400 transition-colors" />
+            <span className="flex items-center border border-white/30 px-2 py-1 rounded-full cursor-pointer hover:border-gray-400 hover:text-gray-400 transition-all duration-200">
               <IoPersonCircleOutline className="mr-1.5 size-5" /> Sign in
             </span>
           </div>

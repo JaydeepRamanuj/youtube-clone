@@ -30,7 +30,7 @@ function HomePage() {
   }, []);
   return (
     <>
-      <div className=" trending-topics flex overflow-auto scrollbar-hide">
+      <div className="trending-topics ml-4 md:ml-0 flex overflow-auto scrollbar-hide">
         {categories.map((category, index) => (
           <TrendingPill
             key={index}

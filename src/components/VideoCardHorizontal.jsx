@@ -16,42 +16,41 @@ function VideoCardHorizontal({
   const navigate = useNavigate();
   return (
     <Link to={`/watch?v=${videoId}`} state={{ channelId }}>
-      <div
-        className={`md:min-w-[250px] p-1.5 cursor-pointer rounded-md transition-all hover:bg-white/10 group flex gap-2 `}
-      >
-        <div className="relative min-w-[40%] max-w-[40%]">
+      <div className="flex flex-col md:flex-row gap-3 p-2 rounded-lg transition-all hover:bg-white/10 group cursor-pointer">
+        <div className="relative min-w-[40%] md:max-w-[40%] aspect-video">
           <img
-            className="rounded-md brightness-75 transition-all group-hover:brightness-100 min-w-full min-h-full object-cover"
             src={videoThumbnailURL}
-            alt=""
+            alt={title}
+            className="w-full h-full object-cover rounded-md brightness-75 group-hover:brightness-100 transition-all"
           />
-          <span className="absolute p-0.5 text-xs rounded font-bold  bg-black/60 text-white bottom-1 right-1">
+          <span className="absolute bottom-1 right-1 bg-black/70 text-white text-xs font-semibold px-1.5 py-0.5 rounded">
             {runtime}
           </span>
         </div>
-        <div className="mt-2 flex justify-between items-start">
+
+        <div className="flex flex-1 justify-between items-start mt-1">
           {showAvatar && (
-            <div className="mt-0.5">
-              <img
-                className="rounded-full min-w-8 min-h-8 max-h-8 max-w-8 "
-                src={thumbnailURL}
-                alt=""
-              />
-            </div>
+            <img
+              src={thumbnailURL}
+              alt={channelName}
+              className="rounded-full w-8 h-8 mt-1"
+            />
           )}
-          <div className="text-start ml-2 mr-auto">
-            <div className="text-white text-wrap">{title}</div>
+
+          <div className="flex flex-col ml-3 mr-auto text-white gap-1">
+            <div className="font-medium leading-snug line-clamp-2">{title}</div>
+
             <div
-              className="text-gray-400 text-sm hover:text-slate-500 mt-1.5"
               onClick={(e) => {
                 e.preventDefault();
                 navigate(`/channel/${channelId}`);
               }}
+              className="text-sm text-gray-400 hover:text-gray-300 transition-colors cursor-pointer"
             >
               {channelName}
             </div>
 
-            <div className="mt-1.5 text-gray-400 flex justify-start items-center text-sm ">
+            <div className="flex items-center text-sm text-gray-400 gap-1">
               <span>{views} views</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -66,18 +65,19 @@ function VideoCardHorizontal({
               <span>{postedTime}</span>
             </div>
           </div>
-          <span className="min-w-4 mt-1.5">
+
+          <button className="p-1 text-white hover:text-gray-300 mt-1.5">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"
               height="18"
               fill="currentColor"
-              className="bi bi-three-dots-vertical text-white"
+              className="bi bi-three-dots-vertical"
               viewBox="0 0 16 16"
             >
               <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
             </svg>
-          </span>
+          </button>
         </div>
       </div>
     </Link>

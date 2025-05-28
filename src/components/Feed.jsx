@@ -7,7 +7,7 @@ import { formatViews, getRandomNumber } from "../utils/utils";
 function Feed({ videosList, avatarURL = "" }) {
   return (
     <>
-      <div className="mt-8 flex flex-1 flex-wrap justify-center gap-2 gap-y-2">
+      <div className="mt-8 flex flex-1 flex-wrap justify-center gap-3.5 gap-y-2">
         {videosList.map((video, index) => (
           <VideoCard
             key={index}

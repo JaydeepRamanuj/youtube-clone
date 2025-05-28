@@ -33,7 +33,7 @@ function VideoPage() {
       channelResult.length != 0 &&
       suggestionResult.length != 0
     ) {
-      console.log(suggestionResult);
+      // console.log(suggestionResult);
       setVideoDetails(videoResult);
       setChannelDetails(channelResult);
       setSuggestedVideosList(suggestionResult);
@@ -52,8 +52,8 @@ function VideoPage() {
   return (
     <>
       {videoDetails && channelDetails && suggestedVideosList && (
-        <div className="flex flex-col lg:flex-row mx-autotext-gray-300 text-3xl ">
-          <div className="flex-1 px-3 w-full lg:max-w-[70%]">
+        <div className="flex flex-col lg:flex-row mx-auto text-gray-300 text-3xl min-w-full">
+          <div className="flex-1 px-3 w-full md:min-w-[70%]">
             <VideoPlayer videoId={videoId} />
             <VideoInfo
               id={videoId}
@@ -70,7 +70,7 @@ function VideoPage() {
             />
             <VideoComments videoId={videoId} />
           </div>
-          <div className="recommended-videos w-full mt-6 lg:mt-0 lg:max-w-[450px] text-base px-3">
+          <div className="recommended-videos w-full mt-6 lg:mt-0  text-base px-3">
             {suggestedVideosList &&
               suggestedVideosList.map((video, index) => (
                 <VideoCardHorizontal

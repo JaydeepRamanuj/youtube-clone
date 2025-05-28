@@ -23,7 +23,7 @@ function Popup() {
   });
   return (
     <div
-      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 shadow-xl bg-stone-800 rounded-lg p-6 text-white/80 backdrop-blur-sm max-w-[600px] max-h-[80%] overflow-auto scrollable-element"
+      className="w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 shadow-xl bg-black/80 rounded-lg p-6 text-white/80 backdrop-blur-lg md:max-w-[600px] md:max-h-[80%] overflow-auto scrollable-element"
       ref={popupRef}
     >
       {toolVal.popupContent}

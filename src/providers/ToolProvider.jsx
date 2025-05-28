@@ -8,6 +8,7 @@ function ToolProvider({ children }) {
     popupContent: null,
     absoluteSidebar: false,
     searchKey: "",
+    isSidebarHidden: true,
   });
 
   return (

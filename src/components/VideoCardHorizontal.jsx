@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function VideoCardHorizontal({
+  isInSearchResult = false,
   videoId,
   channelId,
   thumbnailURL,
@@ -15,8 +16,16 @@ function VideoCardHorizontal({
 }) {
   const navigate = useNavigate();
   return (
-    <Link to={`/watch?v=${videoId}`} state={{ channelId }}>
-      <div className="flex flex-col md:flex-row gap-3 p-2 rounded-lg transition-all hover:bg-white/10 group cursor-pointer">
+    <Link
+      to={`/watch?v=${videoId}`}
+      state={{ channelId }}
+      className="cursor-pointer"
+    >
+      <div
+        className={`max-h-[250px] ${
+          isInSearchResult ? "md:max-w-[70%]" : "md:max-w-[450px]"
+        } md:mx-auto flex flex-col  md:flex-row gap-3 p-2 rounded-lg transition-all hover:bg-white/10 group cursor-pointer`}
+      >
         <div className="relative min-w-[40%] md:max-w-[40%] aspect-video">
           <img
             src={videoThumbnailURL}

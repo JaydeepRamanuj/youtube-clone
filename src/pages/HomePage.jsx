@@ -14,7 +14,7 @@ function HomePage() {
     setIsLoading(true);
     try {
       const videos = await getHomeFeed();
-      setVideosList(videos || []);
+      setVideosList(videos);
     } catch (err) {
       console.error("Error fetching videos:", err);
     } finally {

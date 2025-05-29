@@ -19,6 +19,7 @@ function VideoPage() {
   const videoId = searchParams.get("v");
   const location = useLocation();
   const channelId = location.state.channelId;
+  const categoryId = location.state.videoCategoryId;
   const [videoDetails, setVideoDetails] = useState(null);
   const [channelDetails, setChannelDetails] = useState(null);
   const [suggestedVideosList, setSuggestedVideosList] = useState(null);
@@ -28,7 +29,7 @@ function VideoPage() {
     setIsLoading(true);
     const videoResult = await getVideoDetails(videoId);
     const channelResult = await getChannelDetails(channelId);
-    const suggestionResult = await getSuggestedVideos(videoId);
+    const suggestionResult = await getSuggestedVideos(categoryId);
     if (
       videoResult.length != 0 &&
       channelResult.length != 0 &&
@@ -57,7 +58,6 @@ function VideoPage() {
           <div className="flex-1 px-3 w-full md:min-w-[70%]">
             <VideoPlayer videoId={videoId} />
             <VideoInfo
-              id={videoId}
               channelName={videoDetails.snippet?.channelTitle}
               creatorAvatar={channelDetails.snippet?.thumbnails?.medium?.url}
               likeCount={videoDetails.statistics?.likeCount}

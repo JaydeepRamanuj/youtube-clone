@@ -11,11 +11,19 @@ function VideoCard({
   runtime,
   views,
   postedTime,
+  videoCategoryId,
 }) {
   const navigate = useNavigate();
+  // console.log("videoId =>", videoId);
+  // console.log("channelId =>", channelId);
   return (
-    <Link to={`/watch?v=${videoId}`} state={{ channelId }} className="grow">
-      <div className="min-w-full mx-auto sm:w-[330px] max-w-[400px] h-full  p-2 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/20 shadow-md transition-all hover:shadow-lg cursor-pointer group">
+    <Link
+      to={`/watch?v=${videoId}`}
+      state={{ channelId, videoCategoryId }}
+      className="grow"
+    >
+      {/* <div className="w-full mx-auto sm:w-[330px] max-w-[400px] h-full  p-2 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/20 shadow-md transition-all hover:shadow-lg cursor-pointer group"> */}
+      <div className="w-full  sm:w-[380px] h-full  p-2 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/20 shadow-md transition-all hover:shadow-lg cursor-pointer group">
         <div className="relative overflow-hidden rounded-lg">
           <img
             className="w-full h-auto object-cover rounded-lg brightness-75 group-hover:brightness-100 transition-all duration-300"

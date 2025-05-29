@@ -1,4 +1,4 @@
-const APIKey = import.meta.env.VITE_X_RAPIDAPI_KEY;
+const APIKey = import.meta.env.VITE_X_YOUTUBE_API_KEY;
 
 const baseUrl = "/youtubeapi";
 

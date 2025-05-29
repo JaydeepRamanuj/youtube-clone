@@ -17,9 +17,10 @@ function ResultsPage() {
   const breakpoint = useBreakpoint();
   async function getData() {
     setIsLoading(true);
+    // console.log(key);
     const result = await getSearchResults(key);
-    // console.log(result);
-    if (result.length != 0) {
+    console.log(result);
+    if (result?.length != 0) {
       setVideoList(result);
       setIsLoading(false);
     }

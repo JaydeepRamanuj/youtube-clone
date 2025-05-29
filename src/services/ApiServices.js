@@ -13,9 +13,13 @@ async function getHomeFeed() {
     "https://youtube-v31.p.rapidapi.com/search?relatedToVideoId=x4rFhThSX04&part=id%2Csnippet&type=video&maxResults=50";
   try {
     const response = await fetch(url, options);
-    const result = await response.json();
-    // console.log(result);
-    return result.items;
+
+    if (response.ok) {
+      const result = await response.json();
+      return result.items;
+    } else {
+      console.log("Bad response while loading Feed videos ");
+    }
   } catch (err) {
     console.log("Error while loading Feed videos", err);
   }
@@ -24,9 +28,13 @@ async function getChannelDetails(id) {
   const url = `https://youtube-v31.p.rapidapi.com/channels?&id=${id}`;
   try {
     const response = await fetch(url, options);
-    const result = await response.json();
+    if (response.ok) {
+      const result = await response.json();
+      return result.items[0];
+    } else {
+      console.log("Bad response while getting channel details ");
+    }
     // console.log("channel data:", result.items[0]);
-    return result.items[0];
   } catch (err) {
     console.log("Error while getting channel details,", err);
   }
@@ -36,9 +44,13 @@ async function getChannelVideos(id) {
 
   try {
     const response = await fetch(url, options);
-    const result = await response.json();
-    // console.log("Videos list:", result.items);
-    return result.items;
+    if (response.ok) {
+      const result = await response.json();
+      // console.log("Videos list:", result.items);
+      return result.items;
+    } else {
+      console.log("Bad response while getting channel videos ");
+    }
   } catch (err) {
     console.log("Error while getting channel videos,", err);
   }
@@ -49,9 +61,13 @@ async function getVideoDetails(id) {
 
   try {
     const response = await fetch(url, options);
-    const result = await response.json();
-    // console.log(result.items[0]);
-    return result.items[0];
+    if (response.ok) {
+      const result = await response.json();
+      // console.log(result.items[0]);
+      return result.items[0];
+    } else {
+      console.log("Bad response while getting video details ");
+    }
   } catch (err) {
     console.log("Error while getting video details,", err);
   }
@@ -61,9 +77,13 @@ async function getVideoComments(id) {
 
   try {
     const response = await fetch(url, options);
-    const result = await response.json();
-    // console.log(result.items);
-    return result.items;
+    if (response.ok) {
+      const result = await response.json();
+      // console.log(result.items);
+      return result.items;
+    } else {
+      console.log("Bad response while getting video comments ");
+    }
   } catch (err) {
     console.log("Error while getting video comments,", err);
   }
@@ -71,13 +91,19 @@ async function getVideoComments(id) {
 
 async function getSearchResults(searchKey) {
   const url = `https://youtube-v31.p.rapidapi.com/search?q=${searchKey}&part=snippet%2Cid&order=date`;
-  // console.log(searchKey);
+  console.log(searchKey);
 
   try {
     const response = await fetch(url, options);
-    const result = await response.json();
-    // console.log(result.items);
-    return result.items;
+    console.log(response);
+
+    if (response.ok) {
+      const result = await response.json();
+      console.log(result);
+      return result.items;
+    } else {
+      console.log("Bad response while loading search results ");
+    }
   } catch (err) {
     console.log("Error while loading search results", err);
   }
@@ -87,10 +113,13 @@ async function getSuggestedVideos(id) {
 
   try {
     const response = await fetch(url, options);
-
-    const result = await response.json();
-    // console.log(result.items);
-    return result.items;
+    if (response.ok) {
+      const result = await response.json();
+      // console.log(result.items);
+      return result.items;
+    } else {
+      console.log("Bad response while loading suggested videos ");
+    }
   } catch (err) {
     console.log("Error while loading suggested videos", err);
   }

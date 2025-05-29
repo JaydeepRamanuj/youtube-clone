@@ -21,24 +21,30 @@ function ChannelPage() {
   const [videosList, setVideosList] = useState([]);
   const { setToolVal } = useContext(ToolContext);
   const channelId = useParams();
-  async function getData() {
-    setIsLoading(true);
-    // console.log(channelId);
-    const channelData = await getChannelDetails(channelId.id);
-    const channelVideos = await getChannelVideos(channelId.id);
 
-    // console.log(channelData);
-    if (channelData.length != 0 && channelVideos.length != 0) {
-      setVideoData(channelData);
-      setVideosList(channelVideos);
-      setIsLoading(false);
-    }
-  }
   useEffect(() => {
     setToolVal((prev) => ({
       ...prev,
       sidebarCollapse: false,
     }));
+
+    async function getData() {
+      setIsLoading(true);
+      // console.log(channelId);
+      const channelResult = await getChannelDetails(channelId.id);
+      const channelVideos = await getChannelVideos(channelId.id);
+
+      // console.log(channelData);
+      console.log(channelData);
+      console.log(channelVideos);
+
+      if (channelResult?.length != 0 && channelVideos?.length != 0) {
+        setVideoData(channelResult);
+        setVideosList(channelVideos);
+        setIsLoading(false);
+      }
+    }
+
     getData();
   }, []);
 

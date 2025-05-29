@@ -59,7 +59,7 @@ async function getChannelDetails(id) {
 }
 async function getChannelVideos(id, maxResults = 24) {
   const params = new URLSearchParams({
-    part: "id,snippet,contentDetails,statistics",
+    part: "id,snippet",
     channelId: id,
     order: "date",
     maxResults: maxResults,

@@ -17,14 +17,14 @@ function Feed({ videosList, avatarURL = "" }) {
           <VideoCard
             key={index}
             videoId={video.id}
-            channelId={video.snippet.channelId}
-            videoCategoryId={video.snippet.categoryId}
-            title={video.snippet.title}
-            channelName={video.snippet.channelTitle}
-            views={formatViews(video.statistics.viewCount)}
-            runtime={formatYouTubeDuration(video.contentDetails.duration)}
-            postedTime={<TimeAgo publishTime={video.snippet.publishedAt} />}
-            videoThumbnailURL={video.snippet.thumbnails.medium?.url}
+            channelId={video.snippet?.channelId}
+            videoCategoryId={video.snippet?.categoryId}
+            title={video.snippet?.title}
+            channelName={video.snippet?.channelTitle}
+            views={formatViews(video.statistics?.viewCount)}
+            runtime={formatYouTubeDuration(video.contentDetails?.duration)}
+            postedTime={<TimeAgo publishTime={video.snippet?.publishedAt} />}
+            videoThumbnailURL={video.snippet.thumbnails?.medium?.url}
             thumbnailURL={video.snippet.thumbnails.medium?.url}
           />
         ))}

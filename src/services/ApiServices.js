@@ -77,7 +77,7 @@ async function getChannelVideos(id, maxResults = 24) {
       return [];
     }
     const result = await response.json();
-    // console.log(result);
+    console.log(result);
     if (result.error) {
       console.log("Bad response while getting channel videos", result.error);
       return [];

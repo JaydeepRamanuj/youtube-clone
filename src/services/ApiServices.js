@@ -1,6 +1,6 @@
 const APIKey = import.meta.env.VITE_X_YOUTUBE_API_KEY;
 
-const baseUrl = "/youtubeapi";
+const baseUrl = "https://www.googleapis.com/youtube/v3";
 
 async function getHomeFeed(maxResults = 24, regionCode = "IN") {
   const params = new URLSearchParams({

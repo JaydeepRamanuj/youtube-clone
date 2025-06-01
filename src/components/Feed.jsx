@@ -9,10 +9,10 @@ import {
   getRandomNumber,
 } from "../utils/utils";
 function Feed({ videosList, avatarURL = "" }) {
-  console.log(videosList);
+  // console.log(videosList);
   return (
     <>
-      <div className="mt-8 flex flex-1 flex-wrap justify-center gap-3.5 gap-y-2 p-3">
+      <div className="mt-8 flex flex-1 flex-wrap justify-center gap-3.5 gap-y-4 p-3">
         {videosList.map((video, index) => (
           <VideoCard
             key={index}

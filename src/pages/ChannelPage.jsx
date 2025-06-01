@@ -35,7 +35,7 @@ function ChannelPage() {
       const channelVideos = await getChannelVideos(channelId.id);
 
       // console.log(channelData);
-      console.log(channelData);
+      console.log(channelResult);
       console.log(channelVideos);
 
       if (channelResult?.length != 0 && channelVideos?.length != 0) {

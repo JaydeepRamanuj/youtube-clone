@@ -7,6 +7,8 @@ export function getRandomNumber(min, max) {
 }
 
 export function formatYouTubeDuration(duration) {
+  // console.log(duration);
+
   const match = duration.match(/PT(?:(\d+)M)?(?:(\d+)S)?/);
 
   if (match) {

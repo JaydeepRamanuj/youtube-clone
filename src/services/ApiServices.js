@@ -7,7 +7,7 @@ async function getHomeFeed(maxResults = 24, regionCode = "IN") {
     part: "snippet,contentDetails,statistics",
     chart: "mostPopular",
     maxResults: maxResults,
-    // regionCode: regionCode,
+    regionCode: regionCode,
     key: APIKey,
   });
 
@@ -46,7 +46,7 @@ async function getChannelDetails(id) {
       return [];
     }
     const result = await response.json();
-    console.log(result);
+    // console.log(result);
     if (result.error) {
       console.log("Bad response while getting channel details", result.error);
       return [];
@@ -57,8 +57,10 @@ async function getChannelDetails(id) {
     return [];
   }
 }
-async function getChannelVideos(id, maxResults = 24) {
-  const params = new URLSearchParams({
+async function getChannelVideos(id, maxResults = 15) {
+  // We don't get contentDetails with search query, to get channel videos we have to first find all videoId for that specific channel and then make another request asking for required data in second request
+
+  const searchParams = new URLSearchParams({
     part: "id,snippet",
     channelId: id,
     order: "date",
@@ -67,21 +69,60 @@ async function getChannelVideos(id, maxResults = 24) {
     key: APIKey,
   });
 
-  const url = `${baseUrl}/search?${params.toString()}`;
-
+  const searchUrl = `${baseUrl}/search?${searchParams.toString()}`;
+  const videoIds = [];
   try {
-    const response = await fetch(url);
+    const searchResponse = await fetch(searchUrl);
 
-    if (!response.ok) {
-      console.log("HTTP error,", response.status);
+    if (!searchResponse.ok) {
+      console.log("HTTP error,", searchResponse.status);
       return [];
     }
-    const result = await response.json();
+    const result = await searchResponse.json();
+    // console.log(result);
+    if (result.error) {
+      console.log("Bad response while getting video Ids", result.error);
+      return [];
+    }
+    // console.log(result.items);
+
+    result.items.forEach(
+      (video) => video.id && video.id.videoId && videoIds.push(video.id.videoId)
+    );
+    // return result.items;
+    // console.log(videoIds);
+  } catch (err) {
+    console.log("Error while getting video Ids", err);
+    return [];
+  }
+
+  const videoParams = new URLSearchParams({
+    part: "snippet,contentDetails",
+    id: videoIds.join(","),
+    key: APIKey,
+  });
+
+  const videoUrl = `${baseUrl}/videos?${videoParams.toString()}`;
+  // console.log(videoUrl);
+
+  try {
+    const videoResponse = await fetch(videoUrl);
+
+    if (!videoResponse.ok) {
+      console.log("HTTP error,", videoResponse.status);
+      return [];
+    }
+    const result = await videoResponse.json();
     console.log(result);
     if (result.error) {
       console.log("Bad response while getting channel videos", result.error);
       return [];
     }
+    // console.log(result);
+
+    // console.log(result.items);
+
+    // console.log(videoIds);
     return result.items;
   } catch (err) {
     console.log("Error while getting channel videos", err);
@@ -106,7 +147,7 @@ async function getVideoDetails(id) {
       return [];
     }
     const result = await response.json();
-    console.log(result);
+    // console.log(result);
     if (result.error) {
       console.log("Bad response while getting video details", result.error);
       return [];
@@ -137,7 +178,7 @@ async function getVideoComments(id, maxResults = 25) {
       return [];
     }
     const result = await response.json();
-    console.log(result);
+    // console.log(result);
     if (result.error) {
       console.log("Bad response while getting video comments", result.error);
       return [];
@@ -169,7 +210,7 @@ async function getSearchResults(searchKey, maxResults = 15) {
       return [];
     }
     const result = await response.json();
-    console.log(result);
+    // console.log(result);
     if (result.error) {
       console.log("Bad response while loading search results", result.error);
       return [];
@@ -180,8 +221,8 @@ async function getSearchResults(searchKey, maxResults = 15) {
     return [];
   }
 }
-async function getSuggestedVideos(id, maxResults = 15) {
-  console.log(id);
+async function getSuggestedVideos(id, maxResults = 10) {
+  // console.log(id);
 
   const params = new URLSearchParams({
     part: "id,snippet",
@@ -202,7 +243,7 @@ async function getSuggestedVideos(id, maxResults = 15) {
       return [];
     }
     const result = await response.json();
-    console.log(result);
+    // console.log(result);
     if (result.error) {
       console.log("Bad response while loading suggested videos", result.error);
       return [];
